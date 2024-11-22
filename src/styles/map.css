@@ -1,0 +1,19 @@
+
+.map {
+
+}
+
+.map svg {
+    margin-top: 5px;
+    max-height: 635px;
+    overflow: auto;
+    scale: 0.97;
+}
+
+.map-board {
+    width: 63%;
+    height: 58%;
+    top: 185px;
+    left: 15px;
+    position: absolute;
+}

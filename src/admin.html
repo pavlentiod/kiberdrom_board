@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiberdrom Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        input, textarea, button, table {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Improved button styles */
+        button {
+            padding: 10px 20px;
+            background-color: gray;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: gray;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: gray;
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background-color: #ffffff;
+            cursor: not-allowed;
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .actions button {
+            width: auto;
+        }
+
+        .country-input {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<section id="event-info">
+    <h2>Общая информация</h2>
+    <label for="event-title">Название</label>
+    <input type="text" id="event-title" placeholder="Введите название события. Например: '1/4 финала конкурса' ">
+
+    <label for="event-date">Дата</label>
+    <input type="date" id="event-date">
+
+    <label for="event-description">Этап</label>
+    <textarea id="event-description" placeholder="Введите описание события. Например 'Этап Зарница'"></textarea>
+</section>
+
+<!-- Section 2: Edit Data Table -->
+<section id="data-table-section">
+    <h2>Участники</h2>
+    <table id="data-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Регион</th>
+            <th>Очки</th>
+            <th>Пара</th>
+            <th>🖉</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Rows will be added dynamically -->
+        </tbody>
+    </table>
+    <button onclick="addBlankRow()">Добавить пустую строку</button>
+    <button onclick="saveData()" style="background-color: #1a2a5c">Сохранить данные</button>
+</section>
+
+<script>
+    // Fetch data from the server and populate the table
+    async function fetchDataAndFillTable() {
+        try {
+            const response = await fetch('http://127.0.0.1:8013/');
+            const data = await response.json();
+            console.log(data)
+            fillInputsWithData(data.eventInfo)
+            if (data && Array.isArray(data.teams) && data.teams.length > 0) {
+                fillTableWithData(data.teams);
+            } else {
+                console.log('No data available or invalid format');
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+
+    // Function to populate table rows with fetched data
+    function fillTableWithData(teams) {
+        const tableBody = document.getElementById('data-table').querySelector('tbody');
+        tableBody.innerHTML = '';  // Clear existing rows
+
+        teams.forEach((team, index) => {
+            const tr = document.createElement('tr');
+            tr.id = index;
+            tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td contenteditable="true">${team.teamName}</td>
+                    <td contenteditable="true">${team.region}</td>
+                    <td contenteditable="true">${team.score}</td>
+                    <td contenteditable="true">${team.pair}</td>
+                    <td style="width: 100px"><button style="background-color: white" onclick="deleteRow(this)">❌</button></td>
+                `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+
+    function fillInputsWithData(eventInfo) {
+        const fields = document.getElementById('event-info');
+        fields.innerHTML = `<h2>Общая информация</h2>
+        <label for="event-title">Название</label>
+        <input type="text" id="event-title" value="${eventInfo.title}" placeholder="Введите название события. Например: '1/4 финала конкурса' ">
+
+        <label for="event-date">Дата</label>
+        <input type="date" id="event-date" value="${eventInfo.date}">
+
+        <label for="event-description">Этап</label>
+        <textarea id="event-description" placeholder="Введите описание события. Например 'Этап Зарница'">${eventInfo.description}</textarea>`;  // Clear existing rows
+    }
+
+
+    // Add a blank row to the table
+    function addBlankRow() {
+        const tableBody = document.getElementById('data-table').querySelector('tbody');
+        const rowCount = tableBody.rows.length;
+        const tr = document.createElement('tr');
+        tr.id = rowCount + 1;
+        tr.innerHTML = `
+                <td>${rowCount + 1}</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="false">
+                    <input id="list-suggestions-${rowCount + 1}" list="suggestions-${rowCount + 1}" style="width: 90%; height: 30px; background-color: transparent; border-color: transparent">
+                    <datalist id="suggestions-${rowCount + 1}"></datalist>
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td><button onclick="deleteRow(this)">❌</button></td>
+            `;
+        tableBody.appendChild(tr);
+        generateSuggestions(rowCount);
+    }
+
+
+    // Delete row from the table
+    function deleteRow(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+
+        // Re-index rows
+        const tableBody = document.getElementById('data-table').querySelector('tbody');
+        Array.from(tableBody.rows).forEach((row, index) => {
+            row.cells[0].innerText = index + 1;
+        });
+    }
+
+
+    // Save data from the table
+    function saveData() {
+        const tableBody = document.getElementById('data-table').querySelector('tbody');
+        const rows = tableBody.querySelectorAll('tr');
+        const teams = [];
+        const pairs = [];
+        let currentPair = 1;
+        rows.forEach(row => {
+            const name = row.cells[1].innerText.trim();
+            const region = document.getElementById(`list-suggestions-${row.id}`).value
+            const score = parseInt(row.cells[3].innerText.trim(), 10);
+            const pair = row.cells[4].innerText.trim();
+            console.log(region)
+            // Add team data
+            if (name && region && !isNaN(score)) {
+                const teamId = teams.length + 1;  // Assign an incremental ID to each team
+                teams.push({
+                    teamName: name,
+                    region: region,
+                    score: score,
+                    id: teamId,
+                    pair: pair
+                });
+            }
+
+            // Parse pair data (if applicable)
+            if (pair) {
+                const teamNames = pair.split(',').map(item => item.trim());
+                if (teamNames.length === 2) {
+                    const team1Id = teams.find(team => team.teamName === teamNames[0]).id;
+                    const team2Id = teams.find(team => team.teamName === teamNames[1]).id;
+                    pairs.push([team1Id, team2Id]);
+                }
+            }
+        });
+
+        // Collect event info values
+        const eventTitle = document.getElementById('event-title').value.trim();
+        const eventDate = document.getElementById('event-date').value.trim();
+        const eventDescription = document.getElementById('event-description').value.trim();
+
+        // Create JSON structure
+        const jsonData = {
+            teams: teams,
+            currentPair: currentPair,
+            eventInfo: {
+                title: eventTitle,
+                date: eventDate,
+                description: eventDescription
+            }
+        };
+
+        console.log(jsonData);
+        fetch('http://127.0.0.1:8013/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jsonData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+
+    // Fetch and fill table data on page load
+    window.onload = function () {
+        fetchDataAndFillTable();
+    };
+
+    async function generateSuggestions(rowCount) {
+        const response = await fetch("data/regions.json")
+        const data = await response.json()
+        const suggestionsArray = Object.keys(data)
+        const datalist = document.getElementById(`suggestions-${rowCount + 1}`); // Get the datalist by its ID
+
+        // Clear existing options
+        datalist.innerHTML = '';
+
+        // Add new options dynamically from the array
+        suggestionsArray.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value; // Set the value of the option
+            datalist.appendChild(option); // Append the option to the datalist
+        });
+    }
+</script>
+</body>
+</html>

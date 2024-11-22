@@ -1,0 +1,22 @@
+.row-block {
+    width: 50%;
+    height: 75px;
+    border: none;
+    border-left: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#table-container {
+    position: absolute;
+    width: 700px;
+    right: 0;
+    top: 20%;
+    display: grid;
+    /*grid-template-columns: repeat(2, 1fr);*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}

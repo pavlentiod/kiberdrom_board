@@ -1,0 +1,136 @@
+{
+    "teams": [
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 1,
+            "pair": "1"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 2,
+            "pair": "1"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 3,
+            "pair": "2"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 4,
+            "pair": "2"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 5,
+            "pair": "3"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 6,
+            "pair": "3"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 7,
+            "pair": "4"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 8,
+            "pair": "4"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 9,
+            "pair": "5"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 10,
+            "pair": "5"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 11,
+            "pair": "6"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 12,
+            "pair": "6"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 13,
+            "pair": "7"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 14,
+            "pair": "7"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 15,
+            "pair": "8"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 16,
+            "pair": "8"
+        },
+        {
+            "teamName": "K1",
+            "region": "\u0417\u0430\u043f\u043e\u0440\u043e\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2002,
+            "id": 17,
+            "pair": "9"
+        },
+        {
+            "teamName": "K2",
+            "region": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+            "score": 2000,
+            "id": 18,
+            "pair": "9"
+        }
+    ],
+    "currentPair": 1,
+    "eventInfo": {
+        "title": "Title 2",
+        "date": "2025-03-02",
+        "description": "Description"
+    }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#1A2A5C;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st2{fill:#FFFFFF;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st3{font-family:'MyriadPro-Regular';}
+	.st4{font-size:85px;}
+</style>
+<rect x="-3" y="-3" class="st0" width="1922" height="1083"/>
+<rect id="event_x5F_info" x="65" y="3" class="st1" width="1856" height="273.24"/>
+<rect id="current_x5F_match" x="64" y="276.24" class="st1" width="560" height="230.36"/>
+<rect id="team_x5F_table" x="1281" y="276.24" class="st1" width="638" height="803.77"/>
+<rect id="sponsors" x="63" y="911.48" class="st1" width="1218" height="168.53"/>
+<polygon id="map" class="st1" points="1281,911.48 64,911.48 64,506.6 623,507.6 623,277.24 1281,276.24 "/>
+<rect x="66" y="1" class="st1" width="1853" height="275"/>
+<text transform="matrix(1 0 0 1 801.8662 162.2485)" class="st2 st3 st4">EVENT INFO</text>
+<g>
+	<text transform="matrix(1 0 0 1 482.6626 1029.1211)" class="st2 st3 st4">SPONSORS</text>
+</g>
+</svg>

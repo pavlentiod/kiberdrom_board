@@ -1,0 +1,21 @@
+
+.team-block {
+    width: 155px;
+    height: 82px;
+    text-align: center;
+    margin-right: 40px;
+}
+
+.team-block .top-text {
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 10;
+    margin-bottom: 5px;
+}
+
+.team-block .bottom-text {
+    font-size: 38px;
+    font-weight: bold;
+    max-width: 155px;
+    overflow: hidden;
+}

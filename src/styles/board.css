@@ -1,0 +1,24 @@
+
+.board {
+    text-align: center;
+    bottom: 55%;
+    right: 40%;
+    scale: 0.65;
+    position: absolute;
+}
+
+.board-row {
+    width: 560px;
+    height: 82px;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.vs {
+    color: white;
+    width: 380px;
+    text-align: end;
+    font-size: 22px;
+}

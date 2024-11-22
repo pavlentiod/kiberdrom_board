@@ -1,0 +1,26 @@
+.info {
+    left: 52.5%;
+    color: white;
+    width: 350px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.info h1 {
+    font-size: 20pt;
+    margin-bottom: 5px;
+    margin-top: 18px;
+}
+
+.info h2 {
+    font-size: 20pt;
+    margin: 0 0;
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin-top: 7px;
+    font-size: 15pt;
+}
+

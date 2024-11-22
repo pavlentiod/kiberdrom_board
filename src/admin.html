@@ -98,6 +98,8 @@
 
     <label for="event-description">Этап</label>
     <textarea id="event-description" placeholder="Введите описание события. Например 'Этап Зарница'"></textarea>
+    <label for="current-pair">Введите текущую пару</label>
+    <input type="text" id="current-pair" placeholder="Пример: 1">
 </section>
 
 <!-- Section 2: Edit Data Table -->
@@ -129,7 +131,7 @@
             const response = await fetch('http://127.0.0.1:8013/');
             const data = await response.json();
             console.log(data)
-            fillInputsWithData(data.eventInfo)
+            fillInputsWithData(data.eventInfo, data.currentPair)
             if (data && Array.isArray(data.teams) && data.teams.length > 0) {
                 fillTableWithData(data.teams);
             } else {
@@ -148,21 +150,25 @@
 
         teams.forEach((team, index) => {
             const tr = document.createElement('tr');
-            tr.id = index;
+            tr.id = index + 1;
             tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td contenteditable="true">${team.teamName}</td>
-                    <td contenteditable="true">${team.region}</td>
+                    <td contenteditable="false">
+                    <input value="${team.region}" id="list-suggestions-${index + 1}" list="suggestions-${index + 1}" style="width: 90%; height: 30px; background-color: transparent; border-color: transparent">
+                    <datalist id="suggestions-${index + 1}"></datalist>
+                </td>
                     <td contenteditable="true">${team.score}</td>
                     <td contenteditable="true">${team.pair}</td>
                     <td style="width: 100px"><button style="background-color: white" onclick="deleteRow(this)">❌</button></td>
                 `;
             tableBody.appendChild(tr);
+            generateSuggestions(index);
         });
     }
 
 
-    function fillInputsWithData(eventInfo) {
+    function fillInputsWithData(eventInfo, pair) {
         const fields = document.getElementById('event-info');
         fields.innerHTML = `<h2>Общая информация</h2>
         <label for="event-title">Название</label>
@@ -172,7 +178,9 @@
         <input type="date" id="event-date" value="${eventInfo.date}">
 
         <label for="event-description">Этап</label>
-        <textarea id="event-description" placeholder="Введите описание события. Например 'Этап Зарница'">${eventInfo.description}</textarea>`;  // Clear existing rows
+        <textarea id="event-description" placeholder="Введите описание события. Например 'Этап Зарница'">${eventInfo.description}</textarea>
+<label for="current-pair">Введите текущую пару</label>
+    <input type="text" id="current-pair" placeholder="Пример: 1" value="${pair}">`;  // Clear existing rows
     }
 
 
@@ -191,7 +199,7 @@
                 </td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
-                <td><button onclick="deleteRow(this)">❌</button></td>
+                <td><button style="background-color: white"  onclick="deleteRow(this)">❌</button></td>
             `;
         tableBody.appendChild(tr);
         generateSuggestions(rowCount);
@@ -217,13 +225,12 @@
         const rows = tableBody.querySelectorAll('tr');
         const teams = [];
         const pairs = [];
-        let currentPair = 1;
         rows.forEach(row => {
             const name = row.cells[1].innerText.trim();
-            const region = document.getElementById(`list-suggestions-${row.id}`).value
+            const region = document.getElementById(`list-suggestions-${row.id}`).value;
             const score = parseInt(row.cells[3].innerText.trim(), 10);
             const pair = row.cells[4].innerText.trim();
-            console.log(region)
+
             // Add team data
             if (name && region && !isNaN(score)) {
                 const teamId = teams.length + 1;  // Assign an incremental ID to each team
@@ -252,10 +259,13 @@
         const eventDate = document.getElementById('event-date').value.trim();
         const eventDescription = document.getElementById('event-description').value.trim();
 
+        // Collect current pair value
+        const currentPair = document.getElementById('current-pair').value.trim();
+
         // Create JSON structure
         const jsonData = {
             teams: teams,
-            currentPair: currentPair,
+            currentPair: currentPair, // Include the current pair value
             eventInfo: {
                 title: eventTitle,
                 date: eventDate,
@@ -285,6 +295,7 @@
     window.onload = function () {
         fetchDataAndFillTable();
     };
+
 
     async function generateSuggestions(rowCount) {
         const response = await fetch("data/regions.json")

@@ -23,19 +23,29 @@ async function fetchData() {
         const currentTeams = teamPairs[currentPair];
         const regionPair = currentTeams.map(team => regions[team.region]);
 
-        console.log(eventInfo)
-
         generateRowBlocks(teamPairs, currentPair);
         loadSVG(regionPair);
         generateBoard(currentTeams);
         addInfo(eventInfo.title, eventInfo.description, eventInfo.date)
+        return data
     } catch (error) {
         console.error("Error fetching or processing data:", error);
     }
 }
 
+async function checkUpdate() {
+    const currentData = await fetchData()
+    const data2 = await fetchJSON(BASE_URL);
+    if ( JSON.stringify(currentData) !== JSON.stringify(data2) ) {
+        console.log("not the same")
+    }
+    else {
+        console.log(currentData)
+        console.log(data2)
+        console.log("same")
+    }
+}
 
-// Fetch JSON data from a given URL
 async function fetchJSON(url) {
     try {
         const response = await fetch(url);
@@ -143,7 +153,7 @@ function generateHTML(title, stage, date) {
     // Generate the HTML string
     return `
         <div class="info">
-            <h1>Рейтинг команд</h1>
+            <h1>РЕЙТИНГ КОМАНД</h1>
             <h2>${title}</h2>
             <h2>${stage}</h2>
             <p>${formattedDate}</p>
@@ -251,7 +261,6 @@ function createScoreBlock(teamName, region, score) {
 }
 
 
-fetchData();
-
+setInterval(checkUpdate, 10000);
 
 

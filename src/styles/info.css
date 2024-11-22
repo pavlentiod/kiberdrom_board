@@ -1,22 +1,23 @@
 .info {
-    left: 52.5%;
+    left: 54%;
     color: white;
     width: 350px;
     position: absolute;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .info h1 {
-    font-size: 20pt;
-    margin-bottom: 5px;
-    margin-top: 18px;
+    font-size: 25pt;
+    margin-bottom: -5px;
+    margin-top: 15px;
 }
 
 .info h2 {
     font-size: 20pt;
     margin: 0 0;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .info p {

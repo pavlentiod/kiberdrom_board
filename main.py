@@ -13,12 +13,7 @@ app = FastAPI()
 
 
 @app.get("/show", response_class=RedirectResponse)
-def get_board(pair: int = 1):
-    with open("./data.json", "r", encoding="utf-8") as f:
-        data = json.loads(f.read())
-        data["currentPair"] = pair
-    with open("./data.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+def get_board():
     return FileResponse("src/board.html")
 
 @app.get("/admin", response_class=RedirectResponse)

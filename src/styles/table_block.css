@@ -1,5 +1,5 @@
 .row-block {
-    width: 50%;
+    width: 230px;
     height: 75px;
     border: none;
     border-left: 2px solid white;
@@ -10,13 +10,18 @@
 
 #table-container {
     position: absolute;
-    width: 700px;
     right: 0;
-    top: 20%;
+    top: 24%;
     display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
+    grid-template-columns: repeat(2, 1fr);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+
+#table-container > .row-block:last-child {
+    grid-column: 1 / -1; /* Span across all columns */
+    justify-self: center; /* Horizontally center within the grid */
+    margin-top: -3px;
 }

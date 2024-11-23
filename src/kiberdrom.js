@@ -27,24 +27,35 @@ async function fetchData() {
         loadSVG(regionPair);
         generateBoard(currentTeams);
         addInfo(eventInfo.title, eventInfo.description, eventInfo.date)
-        return data
+
+        setTimeout(() => {
+        }, 10000)
+        setInterval(async () => {
+            const current = await fetchJSON(BASE_URL)
+            if (JSON.stringify(current) !== JSON.stringify(data)) {
+                console.log("updating....")
+                location.reload()
+            } else console.log("no updates")
+        }, 10000)
+
     } catch (error) {
         console.error("Error fetching or processing data:", error);
     }
 }
 
+
 async function checkUpdate() {
     const currentData = await fetchData()
     const data2 = await fetchJSON(BASE_URL);
-    if ( JSON.stringify(currentData) !== JSON.stringify(data2) ) {
+    if (JSON.stringify(currentData) !== JSON.stringify(data2)) {
         console.log("not the same")
-    }
-    else {
+    } else {
         console.log(currentData)
         console.log(data2)
         console.log("same")
     }
 }
+
 
 async function fetchJSON(url) {
     try {
@@ -62,20 +73,20 @@ async function fetchJSON(url) {
 
 function fillfullTeams(teams) {
     if (teams.length < 10) {
-            const numToAdd = 10 - teams.length;
-            const baseId = teams.length + 1;
-            const pairs = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
+        const numToAdd = 10 - teams.length;
+        const baseId = teams.length + 1;
+        const pairs = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
 
-            for (let i = 0; i < numToAdd; i++) {
-                teams.push({
-                    teamName: ``,
-                    region: "",
-                    score: 0,
-                    id: baseId + i,
-                    pair: `${pairs[baseId + i - 1]}`
-                });
-            }
+        for (let i = 0; i < numToAdd; i++) {
+            teams.push({
+                teamName: ``,
+                region: "",
+                score: 0,
+                id: baseId + i,
+                pair: `${pairs[baseId + i - 1]}`
+            });
         }
+    }
     return teams
 }
 
@@ -147,6 +158,7 @@ function generateHTML(title, stage, date) {
         return `${day} ${month} ${year} года`;
     }
 
+
     // Format the input date
     const formattedDate = formatDate(date);
 
@@ -160,6 +172,7 @@ function generateHTML(title, stage, date) {
         </div>
     `;
 }
+
 
 function addInfo(title, stage, date) {
     const infoElement = document.getElementById("info");
@@ -261,6 +274,6 @@ function createScoreBlock(teamName, region, score) {
 }
 
 
-setInterval(checkUpdate, 10000);
+fetchData()
 
 

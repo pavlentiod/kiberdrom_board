@@ -198,7 +198,7 @@
                     <datalist id="suggestions-${rowCount + 1}"></datalist>
                 </td>
                 <td contenteditable="true"></td>
-                <td contenteditable="true"></td>
+                <td contenteditable="true">0</td>
                 <td><button style="background-color: white"  onclick="deleteRow(this)">❌</button></td>
             `;
         tableBody.appendChild(tr);
@@ -228,7 +228,9 @@
         rows.forEach(row => {
             const name = row.cells[1].innerText.trim();
             const region = document.getElementById(`list-suggestions-${row.id}`).value;
-            const score = parseInt(row.cells[3].innerText.trim(), 10);
+            const score = parseInt(row.cells[3].innerText.trim() !== "" ? row.cells[3].innerText.trim() : "0", 10);
+            console.log("dd")
+            console.log(score)
             const pair = row.cells[4].innerText.trim();
 
             // Add team data
@@ -237,7 +239,7 @@
                 teams.push({
                     teamName: name,
                     region: region,
-                    score: score,
+                    score: score != null ? score : 0,
                     id: teamId,
                     pair: pair
                 });

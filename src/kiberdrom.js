@@ -4,7 +4,7 @@ const SVG_URL = "graphics/map.svg";
 // COLORS
 const COLOR_ONE = "#ffffff";
 const COLOR_TWO = "#65B233";
-
+const PAIRS_NUMBER = 9;
 
 async function fetchData() {
     try {
@@ -72,10 +72,13 @@ async function fetchJSON(url) {
 
 
 function fillfullTeams(teams) {
-    if (teams.length < 10) {
-        const numToAdd = 10 - teams.length;
+    if (teams.length < PAIRS_NUMBER) {
+        const numToAdd = PAIRS_NUMBER - teams.length;
         const baseId = teams.length + 1;
-        const pairs = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
+        const pairs = [];
+    for (let i = 1; i <= PAIRS_NUMBER; i++) {
+        pairs.push(i, i);
+    }
 
         for (let i = 0; i < numToAdd; i++) {
             teams.push({
